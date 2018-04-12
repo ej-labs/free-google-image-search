@@ -69,16 +69,15 @@ export default class GoogleImageSearch {
      * @return {Array}              Array of found images URLs
      */
     static googleGetDesktop(images) {
-
-        // NodeList of table rows
-        images = images.childNodes[0].childNodes
-
         // Empty List of image URLs
         let imgSrc = []
+        
+        // nodelist to array
+        images = Array.prototype.slice.call(images.childNodes[0].childNodes, 0);
 
         // Traverses table node for images
         images.forEach( (tRow) => {
-            tRow = tRow.childNodes
+            tRow = Array.prototype.slice.call(tRow.childNodes, 0);
             tRow.forEach( (tCol) => {
                 let aLink = tCol.childNodes[0].childNodes[0]
                 imgSrc.push(aLink.src)
